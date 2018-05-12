@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name         Github Commit Graphs Improved
 // @namespace    https://github.com/JarateKing
-// @version      1.0
+// @version      1.1
 // @description  Improve Github's commit graphs
 // @include      https://github.com/*
+// @exclude      https://github.com/
+// @exclude      https://github.com/*/*
 // ==/UserScript==
 
 const percent_exponent = 0.7;
