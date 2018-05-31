@@ -1,5 +1,9 @@
 # Github Commit Graphs Improved
 
+Tampermonkey script to make github commit graphs blend colors rather than strict cutoffs.
+
+## Example
+
 <h4 align="center">
   Before:
 </h4>
