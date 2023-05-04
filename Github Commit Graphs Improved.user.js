@@ -1,14 +1,14 @@
 // ==UserScript==
 // @name         Github Commit Graphs Improved
 // @namespace    https://github.com/JarateKing
-// @version      1.3
+// @version      1.4
 // @description  Improve Github's commit graphs
-// @include      https://github.com/*
+// @match        https://github.com/*
 // @exclude      https://github.com/
 // @exclude      https://github.com/*/*
 // ==/UserScript==
 
-const percent_exponent = 0.6;
+const percent_exponent = 0.5;
 
 const color1 = [155, 233, 168];
 const color2 = [64, 196, 99];
@@ -22,30 +22,45 @@ const color4 = [33, 110, 57];
     var maxCommits = 0;
     for (var i = 0; i < elements.length; i++)
     {
-        if (parseInt(elements[i].getAttribute("data-count")) > maxCommits)
+        var value = getValue(elements[i]);
+        if (value > maxCommits)
         {
-            maxCommits = parseInt(elements[i].getAttribute("data-count"));
+            maxCommits = parseInt(value);
         }
     }
     for (i = 0; i < elements.length; i++)
     {
-        if (elements[i].getAttribute("data-count") !== null)
+        value = getValue(elements[i]);
+        if (value !== null)
         {
-            if (parseInt(elements[i].getAttribute("data-count")) == 0)
+            if (parseInt(value) == 0)
             {
-                elements[i].setAttribute("style", "fill: #EBEDF0;");
+                elements[i].style.fill = "#EBEDF0";
+                elements[i].style.backgroundColor = "#EBEDF0";
             }
             else if (maxCommits == 1)
             {
-                elements[i].setAttribute("style", "fill: #9BE9A8;");
+                elements[i].style.fill = "#9BE9A8";
+                elements[i].style.backgroundColor = "#9BE9A8";
             }
             else
             {
-                elements[i].setAttribute("style", "fill: " + getColor(elements[i].getAttribute("data-count"),maxCommits) + ";");
+                var color = getColor(value, maxCommits);
+                elements[i].style.fill = color;
+                elements[i].style.backgroundColor = color;
             }
         }
     }
 })();
+
+function getValue(element)
+{
+    if (element.innerText == null)
+    {
+        return null;
+    }
+    return element.innerText.match(/\d+/)[0];
+}
 
 function getColor(curval,maxval)
 {
