@@ -4,8 +4,6 @@
 // @version      1.4
 // @description  Improve Github's commit graphs
 // @match        https://github.com/*
-// @exclude      https://github.com/
-// @exclude      https://github.com/*/*
 // ==/UserScript==
 
 const percent_exponent = 0.5;
@@ -16,6 +14,10 @@ const color3 = [48, 161, 78];
 const color4 = [33, 110, 57];
 
 (function() {
+    applyChanges();
+})();
+
+function applyChanges() {
     'use strict';
 
     var elements = document.getElementsByClassName("ContributionCalendar-day");
@@ -51,7 +53,7 @@ const color4 = [33, 110, 57];
             }
         }
     }
-})();
+}
 
 function getValue(element)
 {
@@ -86,3 +88,5 @@ function getColor(curval,maxval)
     }
     return "#" + parseInt(total[0]).toString(16) + parseInt(total[1]).toString(16) + parseInt(total[2]).toString(16);
 }
+
+document.addEventListener('DOMNodeInserted', applyChanges, false);
