@@ -89,4 +89,7 @@ function getColor(curval,maxval)
     return "#" + parseInt(total[0]).toString(16) + parseInt(total[1]).toString(16) + parseInt(total[2]).toString(16);
 }
 
-document.addEventListener('DOMNodeInserted', applyChanges, false);
+const targetNode = document.getElementsByTagName("BODY")[0];
+const config = { attributes: false, childList: true, subtree: true };
+const observer = new MutationObserver(applyChanges);
+observer.observe(targetNode, config);
