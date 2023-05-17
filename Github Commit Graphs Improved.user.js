@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Github Commit Graphs Improved
 // @namespace    https://github.com/JarateKing
-// @version      1.4
+// @version      1.5
 // @description  Improve Github's commit graphs
 // @match        https://github.com/*
 // ==/UserScript==
@@ -61,7 +61,10 @@ function getValue(element)
     {
         return null;
     }
-    return element.innerText.match(/\d+/)[0];
+    if (element.innerText.match(/^\d/)) {
+        return element.innerText.match(/\d+/)[0];
+    }
+    return 0;
 }
 
 function getColor(curval,maxval)
