@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Github Commit Graphs Improved
 // @namespace    https://github.com/JarateKing
-// @version      1.5
+// @version      1.6
 // @description  Improve Github's commit graphs
 // @match        https://github.com/*
 // ==/UserScript==
@@ -57,12 +57,18 @@ function applyChanges() {
 
 function getValue(element)
 {
-    if (element.innerText == null)
+    var tooltipid = element.getAttribute("aria-labelledby");
+    if (tooltipid == null)
     {
         return null;
     }
-    if (element.innerText.match(/^\d/)) {
-        return element.innerText.match(/\d+/)[0];
+    var tooltip = document.getElementById(tooltipid);
+    if (tooltip == null)
+    {
+        return null;
+    }
+    if (tooltip.innerText.match(/^\d/)) {
+        return tooltip.innerText.match(/\d+/)[0];
     }
     return 0;
 }
